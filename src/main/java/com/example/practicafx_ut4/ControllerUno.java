@@ -5,13 +5,12 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class Controller {
+public class ControllerUno {
 
     @FXML
     public ToggleGroup botonesAlergia;
@@ -82,7 +81,6 @@ public class Controller {
         nombreAlergia.setText(bundle.getString("label.nombreAlergia"));
         radioButtonSi.setText(bundle.getString("radioButton.radioButtonSi"));
         radioButtonNo.setText(bundle.getString("radioButton.radioButtonNo"));
-        datosHijo.setText(bundle.getString("label.datosHijo"));
     }
 
     public void cambiarIdioma(Locale locale, String idiomaMenuText) {

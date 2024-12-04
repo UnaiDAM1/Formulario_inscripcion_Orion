@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" prefHeight="900.0" prefWidth="500.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicafx_ut4.Controller">
+<VBox alignment="TOP_CENTER" prefHeight="900.0" prefWidth="500.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicafx_ut4.ControllerUno">
    <children>
       <ScrollPane prefHeight="851.0" prefWidth="480.0">
         <content>
