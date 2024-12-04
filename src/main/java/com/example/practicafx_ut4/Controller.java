@@ -82,6 +82,7 @@ public class Controller {
         nombreAlergia.setText(bundle.getString("label.nombreAlergia"));
         radioButtonSi.setText(bundle.getString("radioButton.radioButtonSi"));
         radioButtonNo.setText(bundle.getString("radioButton.radioButtonNo"));
+        datosHijo.setText(bundle.getString("label.datosHijo"));
     }
 
     public void cambiarIdioma(Locale locale, String idiomaMenuText) {
