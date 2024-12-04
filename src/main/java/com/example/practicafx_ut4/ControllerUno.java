@@ -22,12 +22,6 @@ public class ControllerUno {
     public RadioButton radioButtonNo;
 
     @FXML
-    public Button botonFirma;
-
-    @FXML
-    public ImageView imgFirma;
-
-    @FXML
     public ImageView imgFoto;
 
     @FXML
@@ -55,7 +49,6 @@ public class ControllerUno {
 
     @FXML
     public void initialize() {
-        botonFirma.setOnAction(e -> cargarFoto(imgFirma));
         botonFoto.setOnAction(e -> cargarFoto(imgFoto));
 
         MenuItem es = new MenuItem("Español");
