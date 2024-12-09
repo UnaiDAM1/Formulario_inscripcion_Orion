@@ -12,6 +12,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -84,6 +85,17 @@ public class ControllerUno {
 
     @FXML
     public void initialize() {
+
+        botonEnviar.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                newScene.setOnKeyPressed(event -> {
+                    if (event.getCode() == KeyCode.ENTER) {
+                        botonEnviar.fire(); // Con .fire() se simula un clic
+                    }
+                });
+            }
+        });
+
         botonFoto.setOnAction(e -> cargarFoto(imgFoto));
 
         MenuItem es = new MenuItem("Español");
@@ -100,15 +112,16 @@ public class ControllerUno {
     }
 
     public void actualizarIdioma() {
-        datosHijo.setText(bundle.getString("label.datosHijo"));
-        nombreHijo.setText(bundle.getString("label.nombreHijo"));
+        datosHijo.setText(bundle.getString("label.datos"));
+        nombreHijo.setText(bundle.getString("label.nombre"));
         fotoHijo.setText(bundle.getString("label.fotoHijo"));
-        fechaHijo.setText(bundle.getString("label.fechaHijo"));
-        direccionHijo.setText(bundle.getString("label.direccionHijo"));
+        fechaHijo.setText(bundle.getString("label.fecha"));
+        direccionHijo.setText(bundle.getString("label.direccion"));
         alergia.setText(bundle.getString("label.alergia"));
         nombreAlergia.setText(bundle.getString("label.nombreAlergia"));
         radioButtonSi.setText(bundle.getString("radioButton.radioButtonSi"));
         radioButtonNo.setText(bundle.getString("radioButton.radioButtonNo"));
+        botonEnviar.setText(bundle.getString("button.botonContinuar"));
     }
 
     public void cambiarIdioma(Locale locale, String idiomaMenuText) {
@@ -117,7 +130,7 @@ public class ControllerUno {
         actualizarIdioma();
     }
 
-    private void cargarFoto(ImageView img) {
+    public void cargarFoto(ImageView img) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccione una imagen");
         fileChooser.getExtensionFilters().addAll(
@@ -134,22 +147,23 @@ public class ControllerUno {
     public void enviar() {
 
         if (txtNombre.getText().isEmpty() || dni.getText().isEmpty() || nacimiento.getValue() == null || imgFoto.getImage() == null ||
-        direcc.getText().isEmpty() || codPos.getText().isEmpty() || (!radioButtonSi.isSelected() && !radioButtonNo.isSelected())) {
+        direcc.getText().isEmpty() || codPos.getText().isEmpty() || (!radioButtonSi.isSelected() && !radioButtonNo.isSelected())
+                || (radioButtonSi.isSelected() && desc.getText().isEmpty())) {
             Alert alerta = new Alert(Alert.AlertType.ERROR);
             alerta.setTitle("Campos incompletos");
             alerta.setHeaderText("Por favor, rellena todos los campos.");
             alerta.setContentText("Todos los campos son obligatorios para continuar.");
             alerta.show();
             return;
-        } else if (radioButtonSi.isSelected()) {
-            if (desc.getText().isEmpty()) {
-                Alert alerta = new Alert(Alert.AlertType.ERROR);
-                alerta.setTitle("Campos incompletos");
-                alerta.setHeaderText("Por favor, rellena todos los campos.");
-                alerta.setContentText("Todos los campos son obligatorios para continuar.");
-                alerta.show();
-                return;
-            }
+        }
+
+        if (!validarDNI(dni.getText())){
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("DNI incorrecto");
+            alerta.setHeaderText("Porfavor introduzca un DNI o NIE valido.");
+            alerta.setContentText("El DNI debe ser correcto para continuar.");
+            alerta.show();
+            return;
         }
         { try {
                 FXMLLoader cargar = new FXMLLoader(getClass().getResource("/com/example/practicafx_ut4/Dos.fxml"));
@@ -179,6 +193,26 @@ public class ControllerUno {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+    public boolean validarDNI(String dni) {
+        String[] letras = {"T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"};
+        if (dni.length() != 9){
+            return false;
+        } else{
+            if (dni.substring(0, 1).equals("X")){
+                dni = "0" + dni.substring(1);
+            } else if (dni.substring(0, 1).equals("Y")) {
+                dni = "1" + dni.substring(1);
+            } else if (dni.substring(0, 1).equals("Z")) {
+                dni = "2" + dni.substring(1);
+            }
+            int numero = Integer.parseInt(dni.substring(0, 8));
+            if (letras[numero%23].equals(dni.substring(8))){
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }
