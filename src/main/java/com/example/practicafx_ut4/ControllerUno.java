@@ -165,13 +165,27 @@ public class ControllerUno {
             alerta.show();
             return;
         }
+
+        if (!validarNombre(txtNombre.getText())) {
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("Nombre incorrecto");
+            alerta.setHeaderText("Porfavor introduzca un Nombre valido");
+            alerta.setContentText("El nombre debe empezar en mayúsculas.");
+            alerta.show();
+            return;
+        }
         { try {
                 FXMLLoader cargar = new FXMLLoader(getClass().getResource("/com/example/practicafx_ut4/Dos.fxml"));
                 Parent root = cargar.load();
 
                 Stage stage = new Stage();
                 stage.initModality(Modality.APPLICATION_MODAL);
-                stage.setScene(new Scene(root));
+                stage.setScene(new Scene(root, 500, 500));
+
+                // Obtener la ventana actual y cerrarla
+                Stage ventanaActual = (Stage) botonEnviar.getScene().getWindow();
+                ventanaActual.close();
+
                 stage.showAndWait();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -213,6 +227,13 @@ public class ControllerUno {
             } else {
                 return false;
             }
+        }
+    }
+    public boolean validarNombre(String nombre){
+        if (nombre != null && nombre.length() > 0 && Character.isUpperCase(nombre.charAt(0))) {
+            return true;
+        } else {
+            return false;
         }
     }
 }

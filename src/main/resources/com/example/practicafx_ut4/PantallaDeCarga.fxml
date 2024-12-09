@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.practicafx_ut4.PantallaDeCarga">
+   <children>
+      <ImageView fitHeight="200.0" fitWidth="300.0" layoutX="124.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Image/gifEstrellas.gif" />
+         </image>
+      </ImageView>
+      <FlowPane alignment="TOP_CENTER" layoutX="141.0" layoutY="296.0" prefHeight="150.0" prefWidth="217.0">
+         <children>
+            <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0">
+               <FlowPane.margin>
+                  <Insets />
+               </FlowPane.margin>
+            </ProgressBar>
+            <Label text="Se está procesando su inscripción.">
+               <FlowPane.margin>
+                  <Insets top="30.0" />
+               </FlowPane.margin>
+            </Label>
+         </children>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
+      </FlowPane>
+   </children>
+</Pane>

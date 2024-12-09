@@ -64,7 +64,7 @@
                   </Pane>
                </children>
             </VBox>
-            <Button fx:id="botonEnviar" alignment="BOTTOM_RIGHT" layoutX="427.0" layoutY="450.0" mnemonicParsing="false" text="Enviar" />
+            <Button fx:id="botonEnviar" alignment="BOTTOM_RIGHT" layoutX="427.0" layoutY="450.0" mnemonicParsing="false" onAction="#enviar" text="Enviar" />
          </children>
       </AnchorPane>
    </content>
