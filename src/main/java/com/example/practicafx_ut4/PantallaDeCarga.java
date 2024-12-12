@@ -12,17 +12,17 @@ import javafx.util.Duration;
 public class PantallaDeCarga {
 
     @FXML
-    private ProgressBar progressBar;
+    private ProgressBar barraDeProgreso;
 
     public void initialize() {
-        // Iniciamos la barra a cero
-        progressBar.setProgress(0);
+        // Iniciamos la barra de progreso
+        barraDeProgreso.setProgress(0);
 
         // contador para ir rellenando la barra
         Timeline timeline = new Timeline(
                 new KeyFrame(Duration.millis(50), event -> {
-                    double progress = progressBar.getProgress() + 0.01;
-                    progressBar.setProgress(progress);
+                    double progress = barraDeProgreso.getProgress() + 0.01;
+                    barraDeProgreso.setProgress(progress);
                 })
         );
 
@@ -42,7 +42,7 @@ public class PantallaDeCarga {
         alert.setHeaderText(null);
         alert.setContentText("La inscripción se ha completado con éxito.");
         alert.showAndWait();
-        Stage ventanaActual = (Stage)progressBar.getScene().getWindow();
+        Stage ventanaActual = (Stage)barraDeProgreso.getScene().getWindow();
         ventanaActual.close();
     }
 }

@@ -81,11 +81,13 @@ public class ControllerUno {
     @FXML
     public Button botonEnviar;
 
+    // Inicialización del bundle en el que pondremos como lengua por defecto el español
     ResourceBundle bundle = ResourceBundle.getBundle("EtiquetasBundle", new Locale("es", "ES"));
 
     @FXML
     public void initialize() {
 
+        // Con este metodo hacemos que por defecto al darle a la tecla intro se pulse el boton Enviar
         botonEnviar.sceneProperty().addListener((obs, oldScene, newScene) -> {
             if (newScene != null) {
                 newScene.setOnKeyPressed(event -> {
@@ -96,11 +98,14 @@ public class ControllerUno {
             }
         });
 
+        // Con este metodo al darle al boton para añadir una foto se cargue la imagen elegida en el imageView
         botonFoto.setOnAction(e -> cargarFoto(imgFoto));
 
+        // Le damos los dos idiomas que hay dentro del menuButton
         MenuItem es = new MenuItem("Español");
         MenuItem en = new MenuItem("Inglés");
 
+        // Hacemos que al elegir un idioma se traduzca la página al idioma elegido
         es.setOnAction(e -> menuIdioma.setText("Español"));
         en.setOnAction(e -> menuIdioma.setText("Inglés"));
 
@@ -111,6 +116,7 @@ public class ControllerUno {
 
     }
 
+    // Metodo donde cambia los elementos de idioma en finción del bundle
     public void actualizarIdioma() {
         datosHijo.setText(bundle.getString("label.datos"));
         nombreHijo.setText(bundle.getString("label.nombre"));
@@ -124,12 +130,14 @@ public class ControllerUno {
         botonEnviar.setText(bundle.getString("button.botonContinuar"));
     }
 
+    // Metodo para cambiar el texto del manuButton
     public void cambiarIdioma(Locale locale, String idiomaMenuText) {
         bundle = ResourceBundle.getBundle("EtiquetasBundle", locale);
         menuIdioma.setText(idiomaMenuText);
         actualizarIdioma();
     }
 
+    // Metodo que muestra un fileChooser
     public void cargarFoto(ImageView img) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Seleccione una imagen");
@@ -144,6 +152,7 @@ public class ControllerUno {
         }
     }
 
+    // Metodo que valida si el formulario esta relleno y los datos estan metidos correctamente
     public void enviar() {
 
         if (txtNombre.getText().isEmpty() || dni.getText().isEmpty() || nacimiento.getValue() == null || imgFoto.getImage() == null ||
@@ -198,6 +207,7 @@ public class ControllerUno {
         }
     }
 
+    // Metodo que manda al usuario a una dirección
     @FXML
     public void hypervinculoInstagram(){
         try {
@@ -209,6 +219,8 @@ public class ControllerUno {
             throw new RuntimeException(e);
         }
     }
+
+    // Metodo para validar el DNI introducido
     public boolean validarDNI(String dni) {
         String[] letras = {"T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"};
         if (dni.length() != 9){
@@ -229,6 +241,8 @@ public class ControllerUno {
             }
         }
     }
+
+    // Metodo para validar el nombre introducido
     public boolean validarNombre(String nombre){
         if (nombre != null && nombre.length() > 0 && Character.isUpperCase(nombre.charAt(0))) {
             return true;
